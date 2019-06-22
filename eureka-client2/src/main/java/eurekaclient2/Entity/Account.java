@@ -1,5 +1,6 @@
 package eurekaclient2.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,12 @@ public class Account {
     private String confirmPassword;
 
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
     private List<Message> messages = new ArrayList<>();
 
-
+    @JsonIgnore
     @ManyToMany//(fetch = FetchType.EAGER)
     @JoinTable(name = "account_roles", joinColumns = @JoinColumn(name = "account_id" ),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

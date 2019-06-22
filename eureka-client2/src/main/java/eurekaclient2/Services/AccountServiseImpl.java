@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class AccountServiseImpl implements AccountServise {
@@ -36,5 +34,12 @@ public class AccountServiseImpl implements AccountServise {
     @Override
     public Account findAccountByName(String name) {
         return accountRepository.findAccountByName(name);
+    }
+
+    @Override
+    public List<Account> findAll() {
+        List<Account> result = new LinkedList<>();
+        accountRepository.findAll().forEach(result::add);
+        return result;
     }
 }
